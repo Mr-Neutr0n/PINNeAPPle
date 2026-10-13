@@ -106,7 +106,7 @@ Feature examples:
 
 from __future__ import annotations
 
-__version__ = "0.6.3"
+__version__ = "0.7.0"
 __author__  = "pinneapple contributors"
 
 # ---------------------------------------------------------------------------
@@ -575,6 +575,9 @@ _SUBMODULES = {
     "cae":        "pinneapple_data.cae",
     # closed bodies for flow studies (Ahmed body, sphere, cylinder, box)
     "bodies":     "pinneapple_design.geometry.bodies",
+    # geometry library: realistic parametric 3-D geometries (airliner, F1 car, VIPER, wind turbine, ship, ...)
+    # with the code that regenerates them and ready-made STL / glTF / STEP / USD / OBJ files
+    "geometries": "pinneapple_design.geometry_library",
     # data and process security: manifests, signatures, provenance, audit trail, privacy/DP, model scanning
     "security":   "pinneapple_security",
     # verification layer of Veriphysics: Decision Record, evidence report, applicability map, robustness, recommendation
@@ -606,11 +609,17 @@ _SUBMODULES = {
     "loss":       "pinneapple_core.loss",
     "transforms": "pinneapple_core.transforms",
     "func":       "pinneapple_core.func",
+    # model zoo: pre-trained, verified models (load / predict / evaluate / validate / benchmark / finetune)
+    "zoo":        "pinneapple_hub.zoo",
+    # dataset hub: verified datasets with schema, splits, checksums, caching and lazy download
+    "datasets":   "pinneapple_hub.zoo.datasets",
 }
 
 # Lazy functions: resolved on first access, so ``import pinneapple`` does not
 # import their package. ``pinneapple_decision`` itself does not import torch.
 _LAZY_ATTRS = {
+    # physics checks of a field on a grid -> trust card with a deploy decision
+    "trust_card": ("pinneapple_analysis.trust.field_card", "trust_card"),
     "PhysicsOptimizer": ("pinneapple_core.optim", "PhysicsOptimizer"),
     "compile": ("pinneapple_physics.compile_api", "compile"),
     "PhysicsModule": ("pinneapple_core.module", "PhysicsModule"),
